@@ -21,7 +21,6 @@ package ejercicio_5;
 import entidad.Baraja;
 import entidad.Carta;
 import enums.Palo;
-import java.util.ArrayList;
 import servicio.CartaServicio;
 
 public class Ejercicio_5 {
@@ -44,10 +43,19 @@ public class Ejercicio_5 {
             }}
             aux = 0;
         }
-
-        ArrayList<Carta> cartas = baraja.darCartas(15);
-        for (Carta carta1 : cartas) {
-            System.out.println(carta1);
+        
+        baraja.barajar();
+        baraja.mostrarCartas();
+        baraja.siguienteCarta();
+        System.out.println("-------------");
+        
+        int vueltas = 1;
+        
+        while(vueltas < 41){
+            baraja.siguienteCarta();
+            vueltas++;
         }
+       
+        
     }
 }

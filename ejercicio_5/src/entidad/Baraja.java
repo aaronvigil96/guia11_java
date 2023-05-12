@@ -3,15 +3,14 @@ package entidad;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 
 public class Baraja {
     //Atributo
-    LinkedHashSet<Carta> baraja;
+    private ArrayList<Carta> baraja;
     
     //Constructor
     public Baraja(){
-        this.baraja = new LinkedHashSet<>();
+        this.baraja = new ArrayList<>();
     }
     
     //Métodos
@@ -23,11 +22,39 @@ public class Baraja {
             System.out.println(carta);
         }
     }
-    public void barajar(){
-        ArrayList<Carta> cartas = new ArrayList<>(this.baraja);
-        Collections.shuffle(cartas);
+    
+    public void ordenarBarajaAscendete(){
+        Collections.sort(this.baraja, new ComparatorOdenarPorNumero());
     }
     
+    public void ordenarBarajaDescendete(){
+        Collections.sort(this.baraja, new ComparatorOrdenarPorNumeroDescendete());
+    }
+    
+    public void barajar(){
+        Collections.shuffle(this.baraja);
+    }
+    
+    public void siguienteCarta(){
+        Iterator<Carta> iterator = this.baraja.iterator();
+        boolean estado = false;
+        Carta carta;
+        if (this.baraja.size() > 0) {
+            while (iterator.hasNext()) {
+                Carta cartaIterator = iterator.next();
+                carta = cartaIterator;
+                System.out.println(carta);
+                iterator.remove();
+                System.out.println("Carta eliminada");
+                estado = true;
+                break;
+            }
+        }
+        if(!estado){
+            System.out.println("No quedan más cartas");
+        }
+    }
+
     public ArrayList darCartas(int cantidad){
         ArrayList<Carta> cartas = new ArrayList<>();
         
@@ -42,9 +69,5 @@ public class Baraja {
             System.out.println("Lo siento, no hay esa cantidad de cartas");
         }
         return cartas;
-    }
-    
-    public void siguienteCarta(){
-        
     }
 }
