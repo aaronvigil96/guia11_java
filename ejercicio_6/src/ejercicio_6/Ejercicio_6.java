@@ -9,11 +9,14 @@
 */
 package ejercicio_6;
 
-import enumeracion.RazaEnumeracion;
+import servicio.PerroServicio;
+import servicio.PersonaServicio;
 
 public class Ejercicio_6 {
     public static void main(String[] args) {
-        
+        PerroServicio PerroServicio = new PerroServicio();
+        PersonaServicio PersonaServicio = new PersonaServicio();
+        System.out.println(PersonaServicio.crearPersona());
     }
     
 }

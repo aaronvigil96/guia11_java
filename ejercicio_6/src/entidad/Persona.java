@@ -53,4 +53,8 @@ public class Persona {
     public void setPerro(Perro perro) {
         this.perro = perro;
     }
+    @Override
+    public String toString() {
+        return "Persona{" + "nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", documento=" + documento + ", perro=" + perro + '}';
+    }
 }
