@@ -1,16 +1,32 @@
 package entidad;
 
+import Enumeracion.PaloEnumeracion;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Scanner;
 
 public class Baraja {
-    //Atributo
-    private ArrayList<Carta> baraja;
+    //Atributos
+    Scanner entrada = new Scanner(System.in);
+    private final ArrayList<Carta> baraja = new ArrayList<>();
     
     //Constructor
     public Baraja(){
-        this.baraja = new ArrayList<>();
+        Carta carta;
+        int vueltas = 0;
+        for (int i = 0; i < 12; i++) {
+            while(vueltas < 4){
+                carta = new Carta();
+                carta.setNumero(i + 1);
+                if(carta.getNumero() != 0){
+                    carta.setPalo(PaloEnumeracion.values()[vueltas]);
+                    agregarCarta(carta);
+                }
+                vueltas++;
+            }
+            vueltas = 0;
+        }
     }
     
     //Métodos
@@ -22,52 +38,30 @@ public class Baraja {
             System.out.println(carta);
         }
     }
-    
-    public void ordenarBarajaAscendete(){
-        Collections.sort(this.baraja, new ComparatorOdenarPorNumero());
+    public int cartasDisponibles(){
+        return this.baraja.size();
     }
-    
-    public void ordenarBarajaDescendete(){
-        Collections.sort(this.baraja, new ComparatorOrdenarPorNumeroDescendete());
-    }
-    
     public void barajar(){
         Collections.shuffle(this.baraja);
     }
-    
-    public void siguienteCarta(){
+    //Retorno y elimino carta o devuelvo nulo.
+    public Carta siguienteCarta(){
+        Carta carta = null;
         Iterator<Carta> iterator = this.baraja.iterator();
-        boolean estado = false;
-        Carta carta;
-        if (this.baraja.size() > 0) {
-            while (iterator.hasNext()) {
-                Carta cartaIterator = iterator.next();
-                carta = cartaIterator;
-                System.out.println(carta);
-                iterator.remove();
-                System.out.println("Carta eliminada");
-                estado = true;
-                break;
-            }
+        while(iterator.hasNext()){
+            carta = iterator.next();
+            iterator.remove();
+            return carta;
         }
-        if(!estado){
-            System.out.println("No quedan más cartas");
-        }
+        return carta;
     }
-
-    public ArrayList darCartas(int cantidad){
-        ArrayList<Carta> cartas = new ArrayList<>();
-        
-        Iterator<Carta> iterator = this.baraja.iterator();
-        if(cantidad < this.baraja.size()){
-            while(iterator.hasNext()){
-                Carta carta = iterator.next();
-                cartas.add(carta);
-                iterator.remove();
-            }
-        }else{
-            System.out.println("Lo siento, no hay esa cantidad de cartas");
+    public int darCartas(){
+        System.out.println("¿Cuantas cartas queres?");
+        int cantidad = entrada.nextInt();
+        entrada.nextLine();
+        if(cartasDisponibles() < cantidad){
+            cantidad = 0;
         }
-        return cartas;
+        return cantidad;
     }
 }
