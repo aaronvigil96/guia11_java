@@ -1,5 +1,6 @@
 package servicio;
 
+import entidad.Perro;
 import entidad.Persona;
 import java.util.Scanner;
 
@@ -14,9 +15,9 @@ public class PersonaServicio {
         int opcion;
         Persona persona = new Persona();
         System.out.println("Ingresá el nombre de la persona");
-        persona.setNombre(entrada.next());
+        persona.setNombre(entrada.next().toLowerCase());
         System.out.println("Ingresá el apellido de la persona");
-        persona.setApellido(entrada.next());
+        persona.setApellido(entrada.next().toLowerCase());
         do{
             if(vueltas > 0){
                 System.out.println("Ingresá una edad válida");
@@ -42,6 +43,7 @@ public class PersonaServicio {
         }while(documentoString.length() < 7 || documentoString.length() > 8);
         documento = Long.valueOf(documentoString);
         persona.setDocumento(documento);
+        persona.setPerro(new Perro());
         return persona;
     }
 }
