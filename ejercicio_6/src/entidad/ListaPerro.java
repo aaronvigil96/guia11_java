@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 public class ListaPerro {
     //Atributos
-    private ArrayList<Perro> listaPerro = new ArrayList<>();
+    private final ArrayList<Perro> listaPerro = new ArrayList<>();
     //Constructor
     public ListaPerro(){
         
@@ -27,16 +27,14 @@ public class ListaPerro {
         return existe;
     }
     public Perro traerPerro(String nombre){
-        Perro perro = new Perro();
         Iterator<Perro> iterator = this.listaPerro.iterator();
         while(iterator.hasNext()){
             Perro actual = iterator.next();
             if(actual.getNombre().equals(nombre)){
-                perro = actual;
-                break;
+                return actual;
             }
         }
-        return perro;
+        return null;
     }
     
 }

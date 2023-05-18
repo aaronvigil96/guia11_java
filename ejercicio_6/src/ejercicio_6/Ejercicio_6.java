@@ -20,7 +20,6 @@ public class Ejercicio_6 {
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
         int opcion;
-        String nombrePersona, nombrePerro;
         PerroServicio PerroServicio = new PerroServicio();
         PersonaServicio PersonaServicio = new PersonaServicio();
         ListaPersona ListaPersona = new ListaPersona();
@@ -44,24 +43,23 @@ public class Ejercicio_6 {
                     break;
                 }
                 case 3: {
-                    System.out.println("Personas...");
-                    ListaPersona.mostrarPersona();
-                    System.out.println("-------------------");
-                    System.out.println("Escribí el nombre de la persona que va adoptar el perro");
-                    nombrePersona = entrada.next();
-                    System.out.println("Perros...");
-                    ListaPerro.mostrarPerro();
-                    System.out.println("--------------------");
-                    System.out.println("Ingresá el nombre del perro a adoptar");
-                    nombrePerro = entrada.next();
-                    if(ListaPersona.existePersona(nombrePersona) && ListaPerro.existePerro(nombrePerro)){
-                        if(ListaPersona.elPerroEstaAdoptado(nombrePerro)){
-                            System.out.println("Lo siento, ese perro está adoptado");
+                    String perro, persona;
+                    System.out.println("Ingresá el nombre de la persona");
+                    persona = entrada.next();
+                    if(ListaPersona.existePersona(persona)){
+                        System.out.println("Ingresá el nombre del perro");
+                        perro = entrada.next();
+                        if(ListaPerro.existePerro(perro)){
+                            if(ListaPersona.perroYaEstaAdoptado()){
+                                System.out.println("Ese perro ya se encuentra adoptado");
+                            }else {
+                                ListaPersona.adoptarPerro(persona, perro, ListaPerro);
+                            }
                         }else {
-                            ListaPersona.traerPersona(nombrePersona).setPerro(ListaPerro.traerPerro(nombrePerro));
+                            System.out.println("El perro no existe");
                         }
                     }else {
-                        System.out.println("El perro o la persona no existe");
+                        System.out.println("Esa persona no existe");
                     }
                     break;
                 }

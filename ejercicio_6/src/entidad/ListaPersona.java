@@ -37,31 +37,27 @@ public class ListaPersona {
         }
         return existe;
     }
-    public boolean elPerroEstaAdoptado(String nombre){
-        boolean adoptado = false;
-        Iterator<Persona> iterator = this.listaPersona.iterator();
-        while(iterator.hasNext()){
-            Persona actual = iterator.next();
-            String nombrePerro = actual.getPerro().getNombre();
-            if(nombrePerro != null){
-                adoptado = true;
-            }
-        }
-        return adoptado;
+    public boolean perroYaEstaAdoptado(){
+       boolean adoptado = false;
+       Iterator<Persona> iterator = this.listaPersona.iterator();
+       while(iterator.hasNext()){
+           Persona actual = iterator.next();
+           if(actual.getPerro().getNombre() != null){
+               adoptado = true;
+               break;
+           }
+       }
+       return adoptado;
     }
-    public Persona traerPersona(String nombre){
-        Persona persona = new Persona();
+    public void adoptarPerro(String persona, String perro, ListaPerro perros){
         Iterator<Persona> iterator = this.listaPersona.iterator();
         while(iterator.hasNext()){
             Persona actual = iterator.next();
-            if(actual.getNombre().equals(nombre)){
-                persona = actual;
+            if(actual.getNombre().equals(persona)){
+                actual.setPerro(perros.traerPerro(perro));
+                System.out.println("Perro adoptado");
                 break;
             }
         }
-        return persona;
-    }
-    public void adoptarPerro(Perro perro){
-        
     }
 }
